@@ -1,0 +1,28 @@
+/* 大王来了 · 12 维面板样式 */
+
+.ds12-btn{position:fixed;right:14px;bottom:78px;z-index:9997;width:50px;height:50px;border-radius:50%;
+ background:linear-gradient(135deg,#16a34a,#0d9488);color:#fff;border:2px solid #fff;
+ box-shadow:0 6px 18px rgba(0,0,0,.22);font-size:20px;line-height:46px;text-align:center;cursor:pointer;}
+.ds12-mask{position:fixed;inset:0;z-index:9998;background:rgba(15,23,42,.55);display:none;}
+.ds12-wrap{position:fixed;inset:0;z-index:9999;background:#f6f7f9;overflow-y:auto;display:none;
+ -webkit-overflow-scrolling:touch;padding:0 0 90px 0;}
+.ds12-hd{position:sticky;top:0;z-index:2;background:#0f766e;color:#fff;padding:16px 16px 13px;}
+.ds12-hd h2{font-size:18px;margin:0 0 4px 0;}
+.ds12-hd p{font-size:11px;opacity:.9;margin:2px 0;line-height:1.5;}
+.ds12-close{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.2);border:0;color:#fff;
+ width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;}
+.ds12-sum{margin:12px 12px 4px;padding:10px 12px;background:#fff;border-radius:10px;font-size:12px;
+ color:#334155;border:1px solid #e2e8f0;line-height:1.7;}
+.ds12-grid{padding:10px 12px;display:grid;grid-template-columns:1fr;gap:10px;}
+.ds12-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 12px;}
+.ds12-t{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#0f172a;}
+.ds12-no{background:#0f766e;color:#fff;border-radius:6px;font-size:11px;padding:2px 6px;font-weight:600;}
+.ds12-badge{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+.ds12-ok{background:#dcfce7;color:#15803d;}.ds12-partial{background:#fef9c3;color:#a16207;}
+.ds12-none{background:#fee2e2;color:#b91c1c;}
+.ds12-src{font-size:10.5px;color:#64748b;margin:7px 0 8px;line-height:1.6;}
+.ds12-items{display:flex;flex-wrap:wrap;gap:5px;}
+.ds12-items span{font-size:10px;background:#f1f5f9;color:#334155;border-radius:5px;padding:3px 6px;}
+.ds12-foot{margin:6px 12px;font-size:11px;color:#64748b;line-height:1.7;background:#fff;
+ border:1px dashed #cbd5e1;border-radius:10px;padding:10px 12px;}
+@media(min-width:720px){.ds12-grid{grid-template-columns:repeat(2,1fr);}}

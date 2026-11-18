@@ -1,0 +1,44 @@
+{
+  "interval": 60,
+  "timeout": 8,
+  "concurrency": 3,
+  "base": "https://webapi.sporttery.cn/gateway/uniform/football/jcInfo/",
+  "notes": {
+    "notice_list": "https://www.sporttery.cn/ctzc/zcgg/index.html?cid=749",
+    "notice_cors": "该域名响应带 access-control-allow-origin: *，浏览器可直连",
+    "issue_model": "乙组当期为附属玩法：固定 14 场、跨 2~3 个比赛日，不等于当日甲组场次",
+    "sp_note": "官方乙组 SP 接口对外 P0001；跨天场次系数缺失一律标「系数待补」，不编造",
+    "coef_source": "乙组 14 场系数取平均外部系数快照，非官方乙组 SP",
+    "waf_note": "赛果/明细接口按 UA 过滤；无头浏览器 567，普通浏览器正常",
+    "referer_note": "脚本不能设 Referer / UA（浏览器禁止），file:// 下必然无实时"
+  },
+  "probe": [
+    {
+      "key": "roster",
+      "path": "getAllTodayInjurySuspensionV1.qry",
+      "qs": ""
+    },
+    {
+      "key": "standings",
+      "path": "getMatchTablesV2.qry",
+      "qs": "matchId=1"
+    },
+    {
+      "key": "results",
+      "path": "getUniformMatchResultV1.qry",
+      "qs": "matchPage=1&matchPageSize=50"
+    },
+    {
+      "key": "detail",
+      "path": "getMatchCalculatorV1.qry",
+      "qs": "matchId={id}",
+      "each": true
+    },
+    {
+      "key": "notice",
+      "abs": "https://www.sporttery.cn/ctzc/zcgg/index.html",
+      "qs": "cid=749",
+      "text": true
+    }
+  ]
+}
