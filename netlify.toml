@@ -1,0 +1,33 @@
+# 放仓库根目录，文件名必须是 netlify.toml
+# 适配你的仓库：发布内容在多出来的「大王来了_更新_1118」这一层里
+# 这份不带 ignore 规则；git-safe 那份带 ignore，会拦掉「只改 data/」的构建
+
+[build]
+  publish = "大王来了_更新_1118"
+  command = ""          # 纯静态，零构建
+
+[build.environment]
+  TZ = "Asia/Shanghai"
+
+[context.production]
+  command = ""
+
+[[headers]]
+  for = "/data/manifest.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
+[[headers]]
+  for = "/data/base.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
+[[headers]]
+  for = "/data/last_update.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
