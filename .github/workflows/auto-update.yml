@@ -1,0 +1,46 @@
+# 放仓库 .github/workflows/auto-update.yml
+# 定时抓数 -> 只提交那层文件夹里的 3 个 data 文件 -> push main -> Netlify 自动重新部署
+# 注意：这份是「自动发版」版，和之前防误发的 git-safe 版口径不同
+name: 大王来了 自动更新
+
+"on":
+  schedule:
+    # 每 30 分钟，避开整点（GitHub 整点排队严重），UTC 时间
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dawang-auto-update
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 抓取并合并（全部失败则保留上一版）
+        run: python3 tools/auto_update.py
+
+      - name: 仅在有变化时提交，触发 Netlify 部署
+        run: |
+          git config user.name  "dawang-bot"
+          git config user.email "bot@users.noreply.github.com"
+          # 只锁死这三个数据文件：页面本体 index.html / css / js 永不被 bot 改动
+          git add "大王来了_更新_1118/data/base.json" "大王来了_更新_1118/data/manifest.json" "大王来了_更新_1118/data/last_update.json"
+          if git diff --staged --quiet; then
+            echo "无新数据，保留上一版，不提交不部署"
+            exit 0
+          fi
+          git commit -m "auto: $(date -u +%F' '%H:%M) UTC"
+          git push origin HEAD:main
